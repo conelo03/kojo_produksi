@@ -17,7 +17,7 @@ class Pegawai extends CI_Controller {
 
 	public function index()
 	{
-        $data['title']		= 'Data Pegawai';
+    $data['title']		= 'Data Pegawai';
 		$data['pegawai']		= $this->M_pegawai->get_data()->result_array();
 		$this->load->view('pegawai/data', $data);
 	}

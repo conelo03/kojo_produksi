@@ -17,7 +17,7 @@ class Order extends CI_Controller {
 
 	public function index()
 	{
-        $data['title']		= 'Data Order';
+    $data['title']		= 'Data Order';
 		$data['order']		= $this->M_order->get_data()->result_array();
 		$this->load->view('order/data', $data);
 	}

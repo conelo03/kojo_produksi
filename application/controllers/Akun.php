@@ -17,7 +17,7 @@ class Akun extends CI_Controller {
 
 	public function index()
 	{
-        $data['title']		= 'Data Akun';
+    $data['title']		= 'Data Akun';
 		$data['akun']	= $this->db->select('*')->from('tb_akun')->join('tb_pegawai', 'tb_pegawai.id_pegawai=tb_akun.id_pegawai')->get()->result_array();
 		$this->load->view('akun/data', $data);
 	}

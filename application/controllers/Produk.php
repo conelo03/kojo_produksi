@@ -17,7 +17,7 @@ class Produk extends CI_Controller {
 
 	public function index()
 	{
-        $data['title']		= 'Data Produk';
+    $data['title']		= 'Data Produk';
 		$data['produk']		= $this->M_produk->get_data()->result_array();
 		$this->load->view('produk/data', $data);
 	}
