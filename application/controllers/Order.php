@@ -18,7 +18,7 @@ class Order extends CI_Controller {
 	public function index()
 	{
     $data['title']		= 'Data Order';
-		$data['order']		= $this->M_order->get_data()->result_array();
+		$data['order']		= $this->M_order->get_data(null, null, true)->result_array();
 		$this->load->view('order/data', $data);
 	}
 
@@ -45,6 +45,7 @@ class Order extends CI_Controller {
 				'design_order'		=> $file,
 				'catatan'			=> $data['catatan'],
 				'id_pegawai' => $this->session->userdata('id_pegawai'),
+				'status_order'			=> 0,
 				'created_at' => date('Y-m-d H:i:s')
 			];
 			if ($this->M_order->insert($data_user)) {
