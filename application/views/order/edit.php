@@ -73,6 +73,12 @@
                     <?= form_error('jumlah_ukuran_xxl', '<span class="text-danger small">', '</span>'); ?>
                   </div>
                 </div>
+                <div class="form-group">
+                  <label>Design Order</label>
+                  <input type="file" name="design_order" class="form-control">
+                  <input type="hidden" name="design_order_old" value="<?= $order['design_order'] ?>">
+                  <?= form_error('design_order', '<span class="text-danger small">', '</span>'); ?>
+                </div>
                 <div class="row">  
                   <div class="col-md-6 form-group">
                     <label>Catatan</label>

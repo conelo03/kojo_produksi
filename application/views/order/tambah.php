@@ -74,6 +74,11 @@
                   </div>
                 </div>
                 <div class="form-group">
+                  <label>Design Order</label>
+                  <input type="file" name="design_order" class="form-control" required="">
+                  <?= form_error('design_order', '<span class="text-danger small">', '</span>'); ?>
+                </div>
+                <div class="form-group">
                   <label>Catatan</label>
                   <input type="text" name="catatan" class="form-control" value="<?= set_value('catatan'); ?>" required="">
                   <?= form_error('catatan', '<span class="text-danger small">', '</span>'); ?>

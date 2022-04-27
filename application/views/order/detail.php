@@ -116,6 +116,18 @@
                     <div class="col-md-4"><h6>Download BOM List</h6></div>
                     <div class="col-md-8"><h6>: <button type="button" class="btn btn-primary"><i class="fas fa-download"></i> Download</button></h6></div>
                   </div>
+                  <div class="row">
+                    <div class="col-md-4"><h6>Design Order</h6></div>
+                    <div class="col-md-8">
+                      <h6>: 
+                        <?php if (empty($order['design_order'])) {
+                          echo "Tidak ada gambar.";
+                        } else { ?>
+                        <img src="<?= base_url('assets/upload/design_order/'.$order['design_order']) ?>" class="img"/>
+                        <?php } ?>
+                      </h6>
+                    </div>
+                  </div>
                 </div>
                 <div class="tab-pane fade" id="keuangan" role="tabpanel" aria-labelledby="keuangan-tab">
                   <h5>Keuangan</h5> 

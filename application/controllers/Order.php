@@ -31,6 +31,7 @@ class Order extends CI_Controller {
 			$this->load->view('order/tambah', $data);
 		} else {
 			$data		= $this->input->post(null, true);
+			$file = $this->upload_file('design_order');
 			$data_user	= [
 				'tgl_order'			=> $data['tgl_order'],
 				'klien'			=> $data['klien'],
@@ -40,6 +41,7 @@ class Order extends CI_Controller {
 				'jumlah_ukuran_l'			=> $data['jumlah_ukuran_l'],
 				'jumlah_ukuran_xl'			=> $data['jumlah_ukuran_xl'],
 				'jumlah_ukuran_xxl'			=> $data['jumlah_ukuran_xxl'],
+				'design_order'		=> $file,
 				'catatan'			=> $data['catatan'],
 				'id_pegawai' => $this->session->userdata('id_pegawai'),
 				'created_at' => date('Y-m-d H:i:s')
@@ -66,6 +68,11 @@ class Order extends CI_Controller {
 			$this->load->view('order/edit', $data);
 		} else {
 			$data		= $this->input->post(null, true);
+			if (empty($_FILES['design_order']['name'])) {
+				$file = $data['design_order_old'];
+			}else{
+				$file = $this->upload_file('design_order');
+			}
 			$data_user	= [
 				'id_order'		=> $id_order,
 				'tgl_order'			=> $data['tgl_order'],
@@ -76,6 +83,7 @@ class Order extends CI_Controller {
 				'jumlah_ukuran_l'			=> $data['jumlah_ukuran_l'],
 				'jumlah_ukuran_xl'			=> $data['jumlah_ukuran_xl'],
 				'jumlah_ukuran_xxl'			=> $data['jumlah_ukuran_xxl'],
+				'design_order'		=> $file,
 				'catatan'			=> $data['catatan'],
 				'status_order'			=> $data['status_order']
 			];
@@ -126,7 +134,7 @@ class Order extends CI_Controller {
 
 	public function detail($id_order)
 	{
-        $data['title']		= 'Data Order';
+    $data['title']		= 'Data Order';
 		$data['order']		= $this->M_order->get_by_id($id_order);
 		$data['keuangan']		= $this->db->get_where('tb_keuangan', ['id_order' => $id_order])->row_array();
 		$data['purchase']		= $this->db->get_where('tb_purchase', ['id_order' => $id_order])->row_array();
