@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2022 at 05:50 AM
+-- Generation Time: Apr 27, 2022 at 09:36 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.2.33
 
@@ -45,7 +45,8 @@ INSERT INTO `tb_akun` (`id_akun`, `id_pegawai`, `username`, `password`, `role`) 
 (5, 4, 'marketing', '$2y$10$tMeHt/kAenFwvubmrCAi3uZdVd6AucOFdYjjPwzYOBufi7UFDQe8C', 'Marketing'),
 (6, 8, 'keuangan', '$2y$10$N7O.Irk8kIK3OOUpklLsEOpBfWQVmNeKYTTjhsxzWpWWBWbXCL7D2', 'Keuangan'),
 (7, 9, 'purchase', '$2y$10$yhqIod5blD9Pzl/bIu.x8.pRp3SSo7PKrF2qu1Y4ipqYB4bV/IK5y', 'Purchase'),
-(8, 10, 'produksi', '$2y$10$CKedfoqqyLpiJ5moxl.HJe6E1RGN2/euvO6fbfdB4bTGEpBpwCVvG', 'Marketing,Kepala Produksi');
+(8, 10, 'produksi', '$2y$10$CKedfoqqyLpiJ5moxl.HJe6E1RGN2/euvO6fbfdB4bTGEpBpwCVvG', 'Marketing,Kepala Produksi'),
+(9, 11, 'k_marketing', '$2y$10$CMAAJtm5CCvnalCvjruSfeCJn/PktC2MOKJb22.mJRcTXlXIPPq0.', 'Kepala Marketing');
 
 -- --------------------------------------------------------
 
@@ -152,16 +153,17 @@ INSERT INTO `tb_keuangan` (`id_keuangan`, `id_order`, `id_pegawai`, `file_keuang
 CREATE TABLE `tb_order` (
   `id_order` int(11) NOT NULL,
   `tgl_order` date NOT NULL,
-  `klien` varchar(100) NOT NULL,
+  `id_pelanggan` int(11) NOT NULL,
   `id_produk` int(11) NOT NULL,
   `jumlah_ukuran_s` int(11) NOT NULL,
   `jumlah_ukuran_m` int(11) NOT NULL,
   `jumlah_ukuran_l` int(11) NOT NULL,
   `jumlah_ukuran_xl` int(11) NOT NULL,
   `jumlah_ukuran_xxl` int(11) NOT NULL,
+  `design_order` text,
   `catatan` text NOT NULL,
-  `status_order` int(11) NOT NULL,
-  `id_pegawai` int(11) NOT NULL,
+  `status_order` int(11) DEFAULT NULL,
+  `id_pegawai` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -169,9 +171,9 @@ CREATE TABLE `tb_order` (
 -- Dumping data for table `tb_order`
 --
 
-INSERT INTO `tb_order` (`id_order`, `tgl_order`, `klien`, `id_produk`, `jumlah_ukuran_s`, `jumlah_ukuran_m`, `jumlah_ukuran_l`, `jumlah_ukuran_xl`, `jumlah_ukuran_xxl`, `catatan`, `status_order`, `id_pegawai`, `created_at`) VALUES
-(4, '2022-04-21', 'TES', 2, 5, 5, 5, 5, 5, 'catatan', 4, 1, '2022-04-21 21:28:27'),
-(5, '2022-04-21', 'xxx', 2, 5, 4, 5, 5, 6, 'xxx', 0, 4, '2022-04-22 23:49:02');
+INSERT INTO `tb_order` (`id_order`, `tgl_order`, `id_pelanggan`, `id_produk`, `jumlah_ukuran_s`, `jumlah_ukuran_m`, `jumlah_ukuran_l`, `jumlah_ukuran_xl`, `jumlah_ukuran_xxl`, `design_order`, `catatan`, `status_order`, `id_pegawai`, `created_at`) VALUES
+(4, '2022-04-21', 1, 2, 5, 5, 5, 5, 5, 'WhatsApp_Image_2022-01-12_at_18_59_35.jpeg', 'catatan', 4, 1, '2022-04-21 21:28:27'),
+(5, '2022-04-21', 1, 2, 5, 4, 5, 5, 6, '', 'xxx', 0, 4, '2022-04-22 23:49:02');
 
 -- --------------------------------------------------------
 
@@ -203,7 +205,8 @@ INSERT INTO `tb_pegawai` (`id_pegawai`, `nip`, `nama`, `jabatan`, `alamat`, `tem
 (7, '123', 'tes pegawai qc', 'Pegawai QC', 'bandung', 'bandung', '2022-12-31', 'Laki-laki', 'aj_(2)2.jpeg'),
 (8, '123', 'Pegawai Keuangan', 'Staff Keuangan', 'subang', 'subang', '2022-12-31', 'Laki-laki', 'aj_(2)3.jpeg'),
 (9, '123', 'Pegawai Purchase', 'Staff Purchase', 'subang', 'subang', '2022-12-31', 'Laki-laki', 'aj_(2)4.jpeg'),
-(10, '123', 'Kepala Produksi', 'Kepala Produksi', 'subang', 'subang', '2022-12-31', 'Laki-laki', 'aj_(2)5.jpeg');
+(10, '123', 'Kepala Produksi', 'Kepala Produksi', 'subang', 'subang', '2022-12-31', 'Laki-laki', 'aj_(2)5.jpeg'),
+(11, '123', 'Kepala Marketing', 'Kepala Marketing', 'bandung', 'bandung', '2022-12-31', 'Laki-laki', 'aj_(2)6.jpeg');
 
 -- --------------------------------------------------------
 
@@ -283,6 +286,30 @@ CREATE TABLE `tb_pegawai_qc` (
 
 INSERT INTO `tb_pegawai_qc` (`id_pegawai_qc`, `id_order`, `id_pegawai`, `jumlah`, `harga`, `kasbon`, `tgl_cair`, `ukuran_pendek`, `ukuran_panjang`, `created_at`) VALUES
 (1, 4, 7, 2, 10000, 0, '2022-04-30', '12', '12', '2022-04-22 23:19:21');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_pelanggan`
+--
+
+CREATE TABLE `tb_pelanggan` (
+  `id_pelanggan` int(11) NOT NULL,
+  `nama_pelanggan` varchar(200) NOT NULL,
+  `jenis_kelamin` varchar(10) NOT NULL,
+  `no_telepon` varchar(15) NOT NULL,
+  `alamat` varchar(200) NOT NULL,
+  `instansi` varchar(100) NOT NULL,
+  `username` varchar(150) NOT NULL,
+  `password` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_pelanggan`
+--
+
+INSERT INTO `tb_pelanggan` (`id_pelanggan`, `nama_pelanggan`, `jenis_kelamin`, `no_telepon`, `alamat`, `instansi`, `username`, `password`) VALUES
+(1, 'Tes Pelanggan', 'Laki-laki', '089123123123', 'Bandung', 'PT. XYZ', 'pelanggan', '$2y$10$5VifqomOAsoe39zJDc/GJefzvAwOmvdqMbDeNjocX0piQd5KDOKbS');
 
 -- --------------------------------------------------------
 
@@ -441,6 +468,12 @@ ALTER TABLE `tb_pegawai_qc`
   ADD PRIMARY KEY (`id_pegawai_qc`);
 
 --
+-- Indexes for table `tb_pelanggan`
+--
+ALTER TABLE `tb_pelanggan`
+  ADD PRIMARY KEY (`id_pelanggan`);
+
+--
 -- Indexes for table `tb_pengiriman`
 --
 ALTER TABLE `tb_pengiriman`
@@ -472,7 +505,7 @@ ALTER TABLE `tb_qc`
 -- AUTO_INCREMENT for table `tb_akun`
 --
 ALTER TABLE `tb_akun`
-  MODIFY `id_akun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_akun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tb_bordir`
@@ -508,7 +541,7 @@ ALTER TABLE `tb_order`
 -- AUTO_INCREMENT for table `tb_pegawai`
 --
 ALTER TABLE `tb_pegawai`
-  MODIFY `id_pegawai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_pegawai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tb_pegawai_cutting`
@@ -527,6 +560,12 @@ ALTER TABLE `tb_pegawai_jahit`
 --
 ALTER TABLE `tb_pegawai_qc`
   MODIFY `id_pegawai_qc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tb_pelanggan`
+--
+ALTER TABLE `tb_pelanggan`
+  MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tb_pengiriman`
