@@ -11,7 +11,8 @@ class M_order extends CI_Model {
 		$this->db->from($this->table);
 		$this->db->join('tb_produk', 'tb_produk.id_produk=tb_order.id_produk');
 		$this->db->join('tb_pegawai', 'tb_pegawai.id_pegawai=tb_order.id_pegawai');
-        return $this->db->get();
+		$this->db->join('tb_pelanggan', 'tb_pelanggan.id_pelanggan=tb_order.id_pelanggan');
+    return $this->db->get();
 	}
 
 	public function insert($data)
@@ -25,6 +26,7 @@ class M_order extends CI_Model {
 		$this->db->from($this->table);
 		$this->db->join('tb_produk', 'tb_produk.id_produk=tb_order.id_produk');
 		$this->db->join('tb_pegawai', 'tb_pegawai.id_pegawai=tb_order.id_pegawai');
+		$this->db->join('tb_pelanggan', 'tb_pelanggan.id_pelanggan=tb_order.id_pelanggan');
 		$this->db->where('tb_order.id_order', $id_order);
 		return $this->db->get()->row_array();
 	}

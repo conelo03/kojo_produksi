@@ -21,7 +21,7 @@ function is_marketing()
     $roles = explode(",", $role);
     $status = false;
 
-    if (in_array("Marketing", $roles)) {
+    if (in_array("Marketing", $roles) || in_array("Kepala Marketing", $roles)) {
         $status = true;
     }
 

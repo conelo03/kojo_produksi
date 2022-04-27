@@ -28,13 +28,14 @@ class Order extends CI_Controller {
 		if (!$this->form_validation->run()) {
 			$data['title']		= 'Data Order';
 			$data['produk']		= $this->M_produk->get_data()->result_array();
+			$data['pelanggan']		= $this->M_pelanggan->get_data()->result_array();
 			$this->load->view('order/tambah', $data);
 		} else {
 			$data		= $this->input->post(null, true);
 			$file = $this->upload_file('design_order');
 			$data_user	= [
 				'tgl_order'			=> $data['tgl_order'],
-				'klien'			=> $data['klien'],
+				'id_pelanggan'			=> $data['id_pelanggan'],
 				'id_produk'			=> $data['id_produk'],
 				'jumlah_ukuran_s'			=> $data['jumlah_ukuran_s'],
 				'jumlah_ukuran_m'			=> $data['jumlah_ukuran_m'],
@@ -65,6 +66,7 @@ class Order extends CI_Controller {
 			$data['title']		= 'Data Order';
 			$data['order']	= $this->M_order->get_by_id($id_order);
 			$data['produk']		= $this->M_produk->get_data()->result_array();
+			$data['pelanggan']		= $this->M_pelanggan->get_data()->result_array();
 			$this->load->view('order/edit', $data);
 		} else {
 			$data		= $this->input->post(null, true);
@@ -76,7 +78,7 @@ class Order extends CI_Controller {
 			$data_user	= [
 				'id_order'		=> $id_order,
 				'tgl_order'			=> $data['tgl_order'],
-				'klien'			=> $data['klien'],
+				'id_pelanggan'			=> $data['id_pelanggan'],
 				'id_produk'			=> $data['id_produk'],
 				'jumlah_ukuran_s'			=> $data['jumlah_ukuran_s'],
 				'jumlah_ukuran_m'			=> $data['jumlah_ukuran_m'],
@@ -102,7 +104,7 @@ class Order extends CI_Controller {
 	{
 		$this->form_validation->set_rules('tgl_order', 'Tgl Order', 'required|trim');
 		$this->form_validation->set_rules('id_produk', 'Produk', 'required|trim');
-		$this->form_validation->set_rules('klien', 'Klien', 'required|trim');
+		$this->form_validation->set_rules('id_pelanggan', 'Pelanggan', 'required|trim');
 		$this->form_validation->set_rules('jumlah_ukuran_s', 'Jumlah', 'required|trim');
 		$this->form_validation->set_rules('jumlah_ukuran_m', 'Jumlah', 'required|trim');
 		$this->form_validation->set_rules('jumlah_ukuran_l', 'Jumlah', 'required|trim');

@@ -29,7 +29,7 @@
                     <tr>
                       <th class="text-center">#</th>
                       <th>Tgl Order</th>
-                      <th>Nama Klien</th>
+                      <th>Klien</th>
                       <th>Produk</th>
                       <th>Jumlah</th>
                       <th>Nama Marketing</th>
@@ -44,7 +44,11 @@
                     <tr>
                       <td class="text-center"><?= $no++;?></td>
                       <td><?= $u['tgl_order'];?></td>
-                      <td><?= $u['klien'];?></td>
+                      <td>
+                        <?= $u['nama_pelanggan'];?><br>
+                        (<?= $u['no_telepon'];?>)<br>
+                        <?= $u['instansi'];?><br>
+                      </td>
                       <td><?= $u['nama_produk'];?></td>
                       <td>
                         S : <?= $u['jumlah_ukuran_s'];?><br>

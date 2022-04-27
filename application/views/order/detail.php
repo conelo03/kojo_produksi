@@ -69,8 +69,12 @@
                     <div class="col-md-8"><h6>: <?= $order['tgl_order'] ?></h6></div>
                   </div>
                   <div class="row">
-                    <div class="col-md-4"><h6>Nama Klien</h6></div>
-                    <div class="col-md-8"><h6>: <?= $order['klien'] ?></h6></div>
+                    <div class="col-md-4"><h6>Nama Pelanggan</h6></div>
+                    <div class="col-md-8"><h6>: <?= $order['nama_pelanggan'] ?> (<?= $order['no_telepon'] ?>)</h6></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4"><h6>Instansi</h6></div>
+                    <div class="col-md-8"><h6>: <?= $order['instansi'] ?> </h6></div>
                   </div>
                   <div class="row">
                     <div class="col-md-4"><h6>Produk</h6></div>
