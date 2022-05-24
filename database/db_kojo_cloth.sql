@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2022 at 09:36 AM
+-- Generation Time: May 19, 2022 at 05:01 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.2.33
 
@@ -70,7 +70,7 @@ CREATE TABLE `tb_bordir` (
 
 INSERT INTO `tb_bordir` (`id_bordir`, `id_order`, `id_pegawai`, `file_bordir`, `catatan_bordir`, `status_bordir`, `updated_at`) VALUES
 (1, 4, 1, '5533-15688-1-PB.pdf', 'tes bordir', 2, '2022-04-21 23:25:31'),
-(2, 5, 10, '', '', 1, '2022-04-22 23:55:40');
+(2, 5, 1, '', '', 0, '2022-04-27 17:30:53');
 
 -- --------------------------------------------------------
 
@@ -94,7 +94,7 @@ CREATE TABLE `tb_cutting` (
 
 INSERT INTO `tb_cutting` (`id_cutting`, `id_order`, `id_pegawai`, `file_cutting`, `catatan_cutting`, `status_cutting`, `updated_at`) VALUES
 (1, 4, 1, '3785-12590-1-PB.pdf', 'tes cutting', 4, '2022-04-22 23:20:30'),
-(2, 5, 10, '', '', 1, '2022-04-22 23:55:12');
+(2, 5, 1, '', '', 0, '2022-04-27 17:30:47');
 
 -- --------------------------------------------------------
 
@@ -118,7 +118,7 @@ CREATE TABLE `tb_jahit` (
 
 INSERT INTO `tb_jahit` (`id_jahit`, `id_order`, `id_pegawai`, `file_jahit`, `catatan_jahit`, `status_jahit`, `updated_at`) VALUES
 (1, 4, 1, '5533-15688-1-PB.pdf', 'tes jahit', 4, '2022-04-22 23:20:38'),
-(2, 5, 10, '', '', 1, '2022-04-22 23:55:52');
+(2, 5, 1, '', '', 0, '2022-04-27 17:30:57');
 
 -- --------------------------------------------------------
 
@@ -142,7 +142,7 @@ CREATE TABLE `tb_keuangan` (
 
 INSERT INTO `tb_keuangan` (`id_keuangan`, `id_order`, `id_pegawai`, `file_keuangan`, `catatan_keuangan`, `status_keuangan`, `updated_at`) VALUES
 (2, 4, 1, '5533-15688-1-PB.pdf', 'cefat', 4, '2022-04-22 23:20:16'),
-(3, 5, 8, '', '', 1, '2022-04-22 23:51:55');
+(3, 5, 1, '', '', 0, '2022-04-27 17:30:37');
 
 -- --------------------------------------------------------
 
@@ -164,6 +164,8 @@ CREATE TABLE `tb_order` (
   `catatan` text NOT NULL,
   `status_order` int(11) DEFAULT NULL,
   `id_pegawai` int(11) DEFAULT NULL,
+  `rate` int(1) DEFAULT NULL,
+  `ulasan` text,
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -171,9 +173,9 @@ CREATE TABLE `tb_order` (
 -- Dumping data for table `tb_order`
 --
 
-INSERT INTO `tb_order` (`id_order`, `tgl_order`, `id_pelanggan`, `id_produk`, `jumlah_ukuran_s`, `jumlah_ukuran_m`, `jumlah_ukuran_l`, `jumlah_ukuran_xl`, `jumlah_ukuran_xxl`, `design_order`, `catatan`, `status_order`, `id_pegawai`, `created_at`) VALUES
-(4, '2022-04-21', 1, 2, 5, 5, 5, 5, 5, 'WhatsApp_Image_2022-01-12_at_18_59_35.jpeg', 'catatan', 4, 1, '2022-04-21 21:28:27'),
-(5, '2022-04-21', 1, 2, 5, 4, 5, 5, 6, '', 'xxx', 0, 4, '2022-04-22 23:49:02');
+INSERT INTO `tb_order` (`id_order`, `tgl_order`, `id_pelanggan`, `id_produk`, `jumlah_ukuran_s`, `jumlah_ukuran_m`, `jumlah_ukuran_l`, `jumlah_ukuran_xl`, `jumlah_ukuran_xxl`, `design_order`, `catatan`, `status_order`, `id_pegawai`, `rate`, `ulasan`, `created_at`) VALUES
+(4, '2022-04-21', 1, 2, 5, 5, 5, 5, 5, 'WhatsApp_Image_2022-01-12_at_18_59_35.jpeg', 'catatan', 4, 4, 3, 'ulasan tes', '2022-04-21 21:28:27'),
+(5, '2022-04-21', 1, 2, 5, 4, 5, 5, 6, 'WhatsApp_Image_2022-01-12_at_18_59_35.jpeg', 'xxx', 0, 0, NULL, NULL, '2022-04-22 23:49:02');
 
 -- --------------------------------------------------------
 
@@ -199,7 +201,7 @@ CREATE TABLE `tb_pegawai` (
 
 INSERT INTO `tb_pegawai` (`id_pegawai`, `nip`, `nama`, `jabatan`, `alamat`, `tempat_lahir`, `tanggal_lahir`, `jenis_kelamin`, `foto`) VALUES
 (1, '12345', 'admin', 'Administrator', 'subangg', 'subang', '2022-03-01', 'Laki-laki', 'user.png'),
-(4, 'tess', 'tess', 'Staff Marketing', 'tess', 'tess', '2022-12-31', 'Laki-laki', 'pemandangan-alam-matahari.jpg'),
+(4, 'tess', 'tess', 'Staff Marketing', 'tess', 'tess', '2022-12-31', 'Laki-laki', 'aj_(2)7.jpeg'),
 (5, '123', 'tes cutting', 'Pegawai Cutting', 'tes', 'tes', '2022-04-21', 'Laki-laki', 'aj_(2).jpeg'),
 (6, '123', 'tes pegawai jahit', 'Pegawai Jahit', 'bandun', 'bandung', '2022-04-22', 'Laki-laki', 'aj_(2)1.jpeg'),
 (7, '123', 'tes pegawai qc', 'Pegawai QC', 'bandung', 'bandung', '2022-12-31', 'Laki-laki', 'aj_(2)2.jpeg'),
@@ -309,7 +311,8 @@ CREATE TABLE `tb_pelanggan` (
 --
 
 INSERT INTO `tb_pelanggan` (`id_pelanggan`, `nama_pelanggan`, `jenis_kelamin`, `no_telepon`, `alamat`, `instansi`, `username`, `password`) VALUES
-(1, 'Tes Pelanggan', 'Laki-laki', '089123123123', 'Bandung', 'PT. XYZ', 'pelanggan', '$2y$10$5VifqomOAsoe39zJDc/GJefzvAwOmvdqMbDeNjocX0piQd5KDOKbS');
+(1, 'Tes Pelanggan', 'Laki-laki', '089123123123', 'Bandung', 'PT. XYZ', 'pelanggan', '$2y$10$5VifqomOAsoe39zJDc/GJefzvAwOmvdqMbDeNjocX0piQd5KDOKbS'),
+(2, 'Tes Pelanggan 2', 'Laki-laki', '1234', 'tess', 'tess', 'pelanggan2', '$2y$10$ANwufBlxYomzDffnLJvrlOJ7JJurP/7V7HRVR5iXtRtutwtWiawMy');
 
 -- --------------------------------------------------------
 
@@ -333,7 +336,7 @@ CREATE TABLE `tb_pengiriman` (
 
 INSERT INTO `tb_pengiriman` (`id_pengiriman`, `id_order`, `id_pegawai`, `file_pengiriman`, `catatan_pengiriman`, `status_pengiriman`, `updated_at`) VALUES
 (1, 4, 1, '5533-15688-1-PB.pdf', 'tes kirim', 4, '2022-04-22 23:20:53'),
-(2, 5, 10, '', '', 1, '2022-04-22 23:56:29');
+(2, 5, 1, '', '', 0, '2022-04-27 17:31:05');
 
 -- --------------------------------------------------------
 
@@ -377,7 +380,7 @@ CREATE TABLE `tb_purchase` (
 
 INSERT INTO `tb_purchase` (`id_purchase`, `id_order`, `id_pegawai`, `file_purchase`, `catatan_purchase`, `status_purchase`, `updated_at`) VALUES
 (2, 4, 1, '7__SOAL_UAS-STATISTIKA_SOSIAL-PRODY_NEGARA_KARYAWAN_P2K.pdf', 'tes', 4, '2022-04-22 23:20:23'),
-(3, 5, 9, '', '', 2, '2022-04-22 23:53:29');
+(3, 5, 1, '', '', 0, '2022-04-27 17:30:42');
 
 -- --------------------------------------------------------
 
@@ -401,7 +404,7 @@ CREATE TABLE `tb_qc` (
 
 INSERT INTO `tb_qc` (`id_qc`, `id_order`, `id_pegawai`, `file_qc`, `catatan_qc`, `status_qc`, `updated_at`) VALUES
 (1, 4, 1, '5533-15688-1-PB.pdf', 'tes qc', 4, '2022-04-22 23:20:47'),
-(2, 5, 10, '', '', 1, '2022-04-22 23:56:12');
+(2, 5, 1, '', '', 0, '2022-04-27 17:31:01');
 
 --
 -- Indexes for dumped tables
@@ -565,7 +568,7 @@ ALTER TABLE `tb_pegawai_qc`
 -- AUTO_INCREMENT for table `tb_pelanggan`
 --
 ALTER TABLE `tb_pelanggan`
-  MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tb_pengiriman`
