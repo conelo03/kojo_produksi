@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2022 at 05:01 PM
+-- Generation Time: May 30, 2022 at 03:06 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.2.33
 
@@ -21,6 +21,30 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_kojo_cloth`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_agenda`
+--
+
+CREATE TABLE `tb_agenda` (
+  `id_agenda` int(11) NOT NULL,
+  `nama_agenda` varchar(100) NOT NULL,
+  `tanggal_agenda` date NOT NULL,
+  `tenggat_agenda` date NOT NULL,
+  `tempat` varchar(100) NOT NULL,
+  `waktu` varchar(50) NOT NULL,
+  `keterangan` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_agenda`
+--
+
+INSERT INTO `tb_agenda` (`id_agenda`, `nama_agenda`, `tanggal_agenda`, `tenggat_agenda`, `tempat`, `waktu`, `keterangan`) VALUES
+(2, 'tesss', '2022-12-31', '2022-12-31', 'tess', 'tess', 'tess'),
+(3, 'a', '2022-12-31', '2022-12-31', 'a', 'a', 'aa');
 
 -- --------------------------------------------------------
 
@@ -70,7 +94,8 @@ CREATE TABLE `tb_bordir` (
 
 INSERT INTO `tb_bordir` (`id_bordir`, `id_order`, `id_pegawai`, `file_bordir`, `catatan_bordir`, `status_bordir`, `updated_at`) VALUES
 (1, 4, 1, '5533-15688-1-PB.pdf', 'tes bordir', 2, '2022-04-21 23:25:31'),
-(2, 5, 1, '', '', 0, '2022-04-27 17:30:53');
+(2, 5, 1, '', '', 0, '2022-04-27 17:30:53'),
+(3, 6, 0, NULL, NULL, 0, '2022-05-29 21:13:32');
 
 -- --------------------------------------------------------
 
@@ -94,7 +119,29 @@ CREATE TABLE `tb_cutting` (
 
 INSERT INTO `tb_cutting` (`id_cutting`, `id_order`, `id_pegawai`, `file_cutting`, `catatan_cutting`, `status_cutting`, `updated_at`) VALUES
 (1, 4, 1, '3785-12590-1-PB.pdf', 'tes cutting', 4, '2022-04-22 23:20:30'),
-(2, 5, 1, '', '', 0, '2022-04-27 17:30:47');
+(2, 5, 1, '', '', 0, '2022-04-27 17:30:47'),
+(3, 6, 0, NULL, NULL, 0, '2022-05-29 21:13:32');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_detail_agenda`
+--
+
+CREATE TABLE `tb_detail_agenda` (
+  `id_detail_agenda` int(11) NOT NULL,
+  `id_agenda` int(11) NOT NULL,
+  `foto_agenda` text NOT NULL,
+  `tautan` text NOT NULL,
+  `keterangan` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_detail_agenda`
+--
+
+INSERT INTO `tb_detail_agenda` (`id_detail_agenda`, `id_agenda`, `foto_agenda`, `tautan`, `keterangan`) VALUES
+(1, 2, 'aj_(2)3.jpeg', 'tess', 'tess');
 
 -- --------------------------------------------------------
 
@@ -118,7 +165,8 @@ CREATE TABLE `tb_jahit` (
 
 INSERT INTO `tb_jahit` (`id_jahit`, `id_order`, `id_pegawai`, `file_jahit`, `catatan_jahit`, `status_jahit`, `updated_at`) VALUES
 (1, 4, 1, '5533-15688-1-PB.pdf', 'tes jahit', 4, '2022-04-22 23:20:38'),
-(2, 5, 1, '', '', 0, '2022-04-27 17:30:57');
+(2, 5, 1, '', '', 0, '2022-04-27 17:30:57'),
+(3, 6, 0, NULL, NULL, 0, '2022-05-29 21:13:32');
 
 -- --------------------------------------------------------
 
@@ -142,7 +190,8 @@ CREATE TABLE `tb_keuangan` (
 
 INSERT INTO `tb_keuangan` (`id_keuangan`, `id_order`, `id_pegawai`, `file_keuangan`, `catatan_keuangan`, `status_keuangan`, `updated_at`) VALUES
 (2, 4, 1, '5533-15688-1-PB.pdf', 'cefat', 4, '2022-04-22 23:20:16'),
-(3, 5, 1, '', '', 0, '2022-04-27 17:30:37');
+(3, 5, 1, '', '', 0, '2022-04-27 17:30:37'),
+(4, 6, 0, NULL, NULL, 0, '2022-05-29 21:13:32');
 
 -- --------------------------------------------------------
 
@@ -175,7 +224,8 @@ CREATE TABLE `tb_order` (
 
 INSERT INTO `tb_order` (`id_order`, `tgl_order`, `id_pelanggan`, `id_produk`, `jumlah_ukuran_s`, `jumlah_ukuran_m`, `jumlah_ukuran_l`, `jumlah_ukuran_xl`, `jumlah_ukuran_xxl`, `design_order`, `catatan`, `status_order`, `id_pegawai`, `rate`, `ulasan`, `created_at`) VALUES
 (4, '2022-04-21', 1, 2, 5, 5, 5, 5, 5, 'WhatsApp_Image_2022-01-12_at_18_59_35.jpeg', 'catatan', 4, 4, 3, 'ulasan tes', '2022-04-21 21:28:27'),
-(5, '2022-04-21', 1, 2, 5, 4, 5, 5, 6, 'WhatsApp_Image_2022-01-12_at_18_59_35.jpeg', 'xxx', 0, 0, NULL, NULL, '2022-04-22 23:49:02');
+(5, '2022-04-21', 1, 2, 5, 4, 5, 5, 6, 'WhatsApp_Image_2022-01-12_at_18_59_35.jpeg', 'xxx', 0, 0, NULL, NULL, '2022-04-22 23:49:02'),
+(6, '2022-05-29', 1, 3, 5, 6, 7, 3, 1, 'aj_(2).jpeg', 'tidak ada', 0, 10, NULL, NULL, '2022-05-29 21:13:32');
 
 -- --------------------------------------------------------
 
@@ -336,7 +386,8 @@ CREATE TABLE `tb_pengiriman` (
 
 INSERT INTO `tb_pengiriman` (`id_pengiriman`, `id_order`, `id_pegawai`, `file_pengiriman`, `catatan_pengiriman`, `status_pengiriman`, `updated_at`) VALUES
 (1, 4, 1, '5533-15688-1-PB.pdf', 'tes kirim', 4, '2022-04-22 23:20:53'),
-(2, 5, 1, '', '', 0, '2022-04-27 17:31:05');
+(2, 5, 1, '', '', 0, '2022-04-27 17:31:05'),
+(3, 6, 0, NULL, NULL, 0, '2022-05-29 21:13:32');
 
 -- --------------------------------------------------------
 
@@ -348,15 +399,47 @@ CREATE TABLE `tb_produk` (
   `id_produk` int(11) NOT NULL,
   `jenis_produk` varchar(200) NOT NULL,
   `nama_produk` varchar(200) NOT NULL,
-  `bahan` varchar(200) NOT NULL
+  `bahan` varchar(200) NOT NULL,
+  `foto_produk` text NOT NULL,
+  `pnj_kain_s` double NOT NULL,
+  `pnj_kain_m` double NOT NULL,
+  `pnj_kain_l` double NOT NULL,
+  `pnj_kain_xl` double NOT NULL,
+  `pnj_kain_xxl` double NOT NULL,
+  `harga_kain` double NOT NULL,
+  `jml_kancing_s` double NOT NULL,
+  `jml_kancing_m` double NOT NULL,
+  `jml_kancing_l` double NOT NULL,
+  `jml_kancing_xl` double NOT NULL,
+  `jml_kancing_xxl` double NOT NULL,
+  `harga_kancing` double NOT NULL,
+  `pnj_resleting_s` double NOT NULL,
+  `pnj_resleting_m` double NOT NULL,
+  `pnj_resleting_l` double NOT NULL,
+  `pnj_resleting_xl` double NOT NULL,
+  `pnj_resleting_xxl` double NOT NULL,
+  `harga_resleting` double NOT NULL,
+  `jml_prepet_s` double NOT NULL,
+  `jml_prepet_m` double NOT NULL,
+  `jml_prepet_l` double NOT NULL,
+  `jml_prepet_xl` double NOT NULL,
+  `jml_prepet_xxl` double NOT NULL,
+  `harga_prepet` double NOT NULL,
+  `pnj_rib_s` double NOT NULL,
+  `pnj_rib_m` double NOT NULL,
+  `pnj_rib_l` double NOT NULL,
+  `pnj_rib_xl` double NOT NULL,
+  `pnj_rib_xxl` double NOT NULL,
+  `harga_rib` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_produk`
 --
 
-INSERT INTO `tb_produk` (`id_produk`, `jenis_produk`, `nama_produk`, `bahan`) VALUES
-(2, 'jenis 1', 'produk 1', 'bahan 1');
+INSERT INTO `tb_produk` (`id_produk`, `jenis_produk`, `nama_produk`, `bahan`, `foto_produk`, `pnj_kain_s`, `pnj_kain_m`, `pnj_kain_l`, `pnj_kain_xl`, `pnj_kain_xxl`, `harga_kain`, `jml_kancing_s`, `jml_kancing_m`, `jml_kancing_l`, `jml_kancing_xl`, `jml_kancing_xxl`, `harga_kancing`, `pnj_resleting_s`, `pnj_resleting_m`, `pnj_resleting_l`, `pnj_resleting_xl`, `pnj_resleting_xxl`, `harga_resleting`, `jml_prepet_s`, `jml_prepet_m`, `jml_prepet_l`, `jml_prepet_xl`, `jml_prepet_xxl`, `harga_prepet`, `pnj_rib_s`, `pnj_rib_m`, `pnj_rib_l`, `pnj_rib_xl`, `pnj_rib_xxl`, `harga_rib`) VALUES
+(2, 'jenis 1', 'produk 1', 'bahan 1', 'aj_(2).jpeg', 0.9, 0.93, 0, 0, 0, 20000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(3, 'Kaos Combed 305', 'Kaos Combed 305', 'Combed 305', 'aj_(2)1.jpeg', 0.9, 0.93, 0.97, 1, 1.05, 20000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0.53, 0.56, 0.6, 0.63, 10000);
 
 -- --------------------------------------------------------
 
@@ -380,7 +463,8 @@ CREATE TABLE `tb_purchase` (
 
 INSERT INTO `tb_purchase` (`id_purchase`, `id_order`, `id_pegawai`, `file_purchase`, `catatan_purchase`, `status_purchase`, `updated_at`) VALUES
 (2, 4, 1, '7__SOAL_UAS-STATISTIKA_SOSIAL-PRODY_NEGARA_KARYAWAN_P2K.pdf', 'tes', 4, '2022-04-22 23:20:23'),
-(3, 5, 1, '', '', 0, '2022-04-27 17:30:42');
+(3, 5, 1, '', '', 0, '2022-04-27 17:30:42'),
+(4, 6, 0, NULL, NULL, 0, '2022-05-29 21:13:32');
 
 -- --------------------------------------------------------
 
@@ -404,11 +488,18 @@ CREATE TABLE `tb_qc` (
 
 INSERT INTO `tb_qc` (`id_qc`, `id_order`, `id_pegawai`, `file_qc`, `catatan_qc`, `status_qc`, `updated_at`) VALUES
 (1, 4, 1, '5533-15688-1-PB.pdf', 'tes qc', 4, '2022-04-22 23:20:47'),
-(2, 5, 1, '', '', 0, '2022-04-27 17:31:01');
+(2, 5, 1, '', '', 0, '2022-04-27 17:31:01'),
+(3, 6, 0, NULL, NULL, 0, '2022-05-29 21:13:32');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `tb_agenda`
+--
+ALTER TABLE `tb_agenda`
+  ADD PRIMARY KEY (`id_agenda`);
 
 --
 -- Indexes for table `tb_akun`
@@ -427,6 +518,12 @@ ALTER TABLE `tb_bordir`
 --
 ALTER TABLE `tb_cutting`
   ADD PRIMARY KEY (`id_cutting`);
+
+--
+-- Indexes for table `tb_detail_agenda`
+--
+ALTER TABLE `tb_detail_agenda`
+  ADD PRIMARY KEY (`id_detail_agenda`);
 
 --
 -- Indexes for table `tb_jahit`
@@ -505,6 +602,12 @@ ALTER TABLE `tb_qc`
 --
 
 --
+-- AUTO_INCREMENT for table `tb_agenda`
+--
+ALTER TABLE `tb_agenda`
+  MODIFY `id_agenda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `tb_akun`
 --
 ALTER TABLE `tb_akun`
@@ -514,31 +617,37 @@ ALTER TABLE `tb_akun`
 -- AUTO_INCREMENT for table `tb_bordir`
 --
 ALTER TABLE `tb_bordir`
-  MODIFY `id_bordir` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_bordir` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tb_cutting`
 --
 ALTER TABLE `tb_cutting`
-  MODIFY `id_cutting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_cutting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tb_detail_agenda`
+--
+ALTER TABLE `tb_detail_agenda`
+  MODIFY `id_detail_agenda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tb_jahit`
 --
 ALTER TABLE `tb_jahit`
-  MODIFY `id_jahit` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_jahit` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tb_keuangan`
 --
 ALTER TABLE `tb_keuangan`
-  MODIFY `id_keuangan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_keuangan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tb_order`
 --
 ALTER TABLE `tb_order`
-  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tb_pegawai`
@@ -574,25 +683,25 @@ ALTER TABLE `tb_pelanggan`
 -- AUTO_INCREMENT for table `tb_pengiriman`
 --
 ALTER TABLE `tb_pengiriman`
-  MODIFY `id_pengiriman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pengiriman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tb_produk`
 --
 ALTER TABLE `tb_produk`
-  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tb_purchase`
 --
 ALTER TABLE `tb_purchase`
-  MODIFY `id_purchase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_purchase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tb_qc`
 --
 ALTER TABLE `tb_qc`
-  MODIFY `id_qc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_qc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
