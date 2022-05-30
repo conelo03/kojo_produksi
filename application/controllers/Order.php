@@ -156,20 +156,28 @@ class Order extends CI_Controller {
 		$this->load->view('order/detail', $data);
 	}
 
+	public function cetak($id_order)
+	{
+    $data['title']		= 'Data Order';
+		$data['order']		= $this->M_order->get_by_id($id_order);
+		$data['produk']		= $this->M_produk->get_by_id($data['order']['id_produk']);
+		$this->load->view('order/cetak', $data);
+	}
+
 	private function upload_file($file)
 	{
-	    $config['upload_path'] = './assets/upload/'.$file;
-	    $config['allowed_types'] = 'jpg|png|jpeg|pdf|docx|xlsx|doc|xls';
-	    $config['max_size'] = 10000;
-	    $this->upload->initialize($config);
-	    $this->load->library('upload', $config);
+		$config['upload_path'] = './assets/upload/'.$file;
+		$config['allowed_types'] = 'jpg|png|jpeg|pdf|docx|xlsx|doc|xls';
+		$config['max_size'] = 10000;
+		$this->upload->initialize($config);
+		$this->load->library('upload', $config);
 
-	    if(! $this->upload->do_upload($file))
-	    {
-	    	return '';
-	    }
+		if(! $this->upload->do_upload($file))
+		{
+			return '';
+		}
 
-	    return $this->upload->data('file_name');
+		return $this->upload->data('file_name');
 	}
 
 	public function download_file($file)
