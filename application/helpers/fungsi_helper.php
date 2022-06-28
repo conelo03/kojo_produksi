@@ -121,6 +121,33 @@ function status($status)
     return $stat;
 }
 
+function status_text($status)
+{
+    $stat = '';
+    switch ($status) {
+        case 0:
+            $stat = 'Belum Dikerjakan';
+            break;
+        case 1:
+            $stat = 'Sedang Dikerjakan';
+            break;
+        case 2:
+            $stat = 'Tidak Diperlukan';
+            break;
+        case 3:
+            $stat = 'Ada Masalah';
+            break;
+        case 4:
+            $stat = 'Selesai';
+            break;
+        default:
+            $stat = 'Error';
+            break;
+    }
+
+    return $stat;
+}
+
 function color_btn($status)
 {
     $stat = '';

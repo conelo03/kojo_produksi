@@ -34,6 +34,7 @@
                       <th>Jumlah</th>
                       <th>Nama Marketing</th>
                       <th>Status</th>
+                      <th>Progres</th>
                       <th class="text-center" style="width: 250px;">Aksi</th>
                     </tr>
                   </thead>
@@ -59,6 +60,7 @@
                       </td>
                       <td><?= $u['nama'];?></td>
                       <td><?= status($u['status_order']);?></td>
+                      <td><?= $u['progres'];?></td>
                       <td class="text-center">
                         <a href="<?= base_url('detail-order/'.$u['id_order']);?>" class="btn btn-light"><i class="fa fa-eye"></i> Detail</a>
                         <?php if(is_admin() || is_marketing()):?> 

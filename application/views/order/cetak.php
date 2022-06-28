@@ -1,62 +1,3 @@
-<?php
-  $jml_kain_s = $order['jumlah_ukuran_s'] * $produk['pnj_kain_s'];
-  $jml_kain_m = $order['jumlah_ukuran_m'] * $produk['pnj_kain_m'];
-  $jml_kain_l = $order['jumlah_ukuran_l'] * $produk['pnj_kain_l'];
-  $jml_kain_xl = $order['jumlah_ukuran_xl'] * $produk['pnj_kain_xl'];
-  $jml_kain_xxl = $order['jumlah_ukuran_xxl'] * $produk['pnj_kain_xxl'];
-  $total_harga_kain = ($jml_kain_s * $produk['harga_kain']) + 
-  ($jml_kain_m * $produk['harga_kain']) + 
-  ($jml_kain_l * $produk['harga_kain']) + 
-  ($jml_kain_xl * $produk['harga_kain']) + 
-  ($jml_kain_xxl * $produk['harga_kain']);
-
-  $jml_kancing_s = $order['jumlah_ukuran_s'] * $produk['jml_kancing_s'];
-  $jml_kancing_m = $order['jumlah_ukuran_m'] * $produk['jml_kancing_m'];
-  $jml_kancing_l = $order['jumlah_ukuran_l'] * $produk['jml_kancing_l'];
-  $jml_kancing_xl = $order['jumlah_ukuran_xl'] * $produk['jml_kancing_xl'];
-  $jml_kancing_xxl = $order['jumlah_ukuran_xxl'] * $produk['jml_kancing_xxl'];
-  $total_harga_kancing = ($jml_kancing_s * $produk['harga_kancing']) + 
-  ($jml_kancing_m * $produk['harga_kancing']) + 
-  ($jml_kancing_l * $produk['harga_kancing']) + 
-  ($jml_kancing_xl * $produk['harga_kancing']) + 
-  ($jml_kancing_xxl * $produk['harga_kancing']);
-
-  $jml_resleting_s = $order['jumlah_ukuran_s'] * $produk['pnj_resleting_s'];
-  $jml_resleting_m = $order['jumlah_ukuran_m'] * $produk['pnj_resleting_m'];
-  $jml_resleting_l = $order['jumlah_ukuran_l'] * $produk['pnj_resleting_l'];
-  $jml_resleting_xl = $order['jumlah_ukuran_xl'] * $produk['pnj_resleting_xl'];
-  $jml_resleting_xxl = $order['jumlah_ukuran_xxl'] * $produk['pnj_resleting_xxl'];
-  $total_harga_resleting = ($jml_resleting_s * $produk['harga_resleting']) + 
-  ($jml_resleting_m * $produk['harga_resleting']) + 
-  ($jml_resleting_l * $produk['harga_resleting']) + 
-  ($jml_resleting_xl * $produk['harga_resleting']) + 
-  ($jml_resleting_xxl * $produk['harga_resleting']);
-
-  $jml_prepet_s = $order['jumlah_ukuran_s'] * $produk['jml_prepet_s'];
-  $jml_prepet_m = $order['jumlah_ukuran_m'] * $produk['jml_prepet_m'];
-  $jml_prepet_l = $order['jumlah_ukuran_l'] * $produk['jml_prepet_l'];
-  $jml_prepet_xl = $order['jumlah_ukuran_xl'] * $produk['jml_prepet_xl'];
-  $jml_prepet_xxl = $order['jumlah_ukuran_xxl'] * $produk['jml_prepet_xxl'];
-  $total_harga_prepet = ($jml_prepet_s * $produk['harga_prepet']) + 
-  ($jml_prepet_m * $produk['harga_prepet']) + 
-  ($jml_prepet_l * $produk['harga_prepet']) + 
-  ($jml_prepet_xl * $produk['harga_prepet']) + 
-  ($jml_prepet_xxl * $produk['harga_prepet']);
-
-  $jml_rib_s = $order['jumlah_ukuran_s'] * $produk['pnj_rib_s'];
-  $jml_rib_m = $order['jumlah_ukuran_m'] * $produk['pnj_rib_m'];
-  $jml_rib_l = $order['jumlah_ukuran_l'] * $produk['pnj_rib_l'];
-  $jml_rib_xl = $order['jumlah_ukuran_xl'] * $produk['pnj_rib_xl'];
-  $jml_rib_xxl = $order['jumlah_ukuran_xxl'] * $produk['pnj_rib_xxl'];
-  $total_harga_rib = ($jml_rib_s * $produk['harga_rib']) + 
-  ($jml_rib_m * $produk['harga_rib']) + 
-  ($jml_rib_l * $produk['harga_rib']) + 
-  ($jml_rib_xl * $produk['harga_rib']) + 
-  ($jml_rib_xxl * $produk['harga_rib']);
-
-  $total_biaya = $total_harga_kain + $total_harga_kancing + $total_harga_resleting + $total_harga_prepet + $total_harga_rib;
-
-?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -77,20 +18,32 @@
   <body>
     <div class="container-fluid">
       <h3 class="text-center">BOM List</h3>
-      <div class="row">
-        <div class="col-md-2">Tanggal Order</div>
-        <div class="col-md-10">: <?= $order['tgl_order'] ?></div>
-        <div class="col-md-2">Nama Pelanggan</div>
-        <div class="col-md-10">: <?= $order['nama_pelanggan'] ?> (<?= $order['no_telepon'] ?>)</div>
-        <div class="col-md-2">Produk</div>
-        <div class="col-md-10">: <?= $order['nama_produk'] ?></div>
-        <div class="col-md-2">Nama Marketing</div>
-        <div class="col-md-10">: <?= $order['nama'] ?></div>
-        <div class="col-md-2">Catatan</div>
-        <div class="col-md-10">: <?= $order['catatan'] ?></div>
-        <div class="col-md-2">Total Biaya</div>
-        <div class="col-md-10">: <b>Rp <?= number_format($total_biaya, '2', ',', '.')  ?></b></div>
-      </div>
+      <table width="100%" border='0'>
+        <tr>
+          <td width="20%">Tanggal Order</td>
+          <td>: <?= $order['tgl_order'] ?></td>
+        </tr>
+        <tr>
+          <td width="20%">Nama Pelanggan</td>
+          <td>: <?= $order['nama_pelanggan'] ?> (<?= $order['no_telepon'] ?>)</td>
+        </tr>
+        <tr>
+          <td width="20%">Produk</td>
+          <td>: <?= $order['nama_produk'] ?></td>
+        </tr>
+        <tr>
+          <td width="20%">Nama Marketing</td>
+          <td>: <?= $order['nama'] ?></td>
+        </tr>
+        <tr>
+          <td width="20%">Catatan</td>
+          <td>: <?= $order['catatan'] ?></td>
+        </tr>
+        <tr>
+          <td width="20%">Total Biaya</td>
+          <td>: <b>Rp <?= number_format($total_biaya, '2', ',', '.')  ?></b></td>
+        </tr>
+      </table>
       <br>
       <h6>Jumlah Order :</h6>
       <table width="100%" border="1">
@@ -279,9 +232,6 @@
           <th class="text-right">Rp <?= number_format($total_harga_prepet, '2', ',', '.')  ?></th>
         </tr>
       </table>
-      <div class="break">
-
-      </div>
       <br>
       <h6>Kebutuhan RIB :</h6>
       <table width="100%" border="1">
@@ -329,7 +279,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script>
-      window.print();
+      //window.print();
     </script>
   </body>
 </html>

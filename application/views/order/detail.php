@@ -18,7 +18,7 @@
               <h4>Detail Order <?= $order['nama_produk'] ?></h4>
             </div>
             <div class="card-body">
-              <ul class="nav nav-tabs" id="myTab2" role="tablist">
+              <ul class="nav nav-tabs" id="myTab3Content" role="tablist">
                 <li class="nav-item">
                   <a class="nav-link active" id="overview-tab" data-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">
                     <button type="button" class="btn btn-<?= color_btn($order['status_order']) ?>">Overview</button>
@@ -118,7 +118,7 @@
                   </div>
                   <div class="row">
                     <div class="col-md-4"><h6>Download BOM List</h6></div>
-                    <div class="col-md-8"><h6>: <a href="<?= base_url('cetak-bom-list/'.$order['id_order']) ?>" target="_blank" class="btn btn-primary"><i class="fas fa-download"></i> Download</a></h6></div>
+                    <div class="col-md-8"><h6>: <a href="<?= base_url('cetak-bom-list/'.$order['id_order']) ?>" class="btn btn-primary"><i class="fas fa-download"></i> Download</a></h6></div>
                   </div>
                   <div class="row">
                     <div class="col-md-4"><h6>Design Order</h6></div>

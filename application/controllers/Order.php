@@ -153,15 +153,93 @@ class Order extends CI_Controller {
 		$data['pegawai_jahit']		= $this->db->get()->result_array();
 		$this->db->select('*, tb_pegawai_qc.id_pegawai as id_pegawai')->from('tb_pegawai_qc')->join('tb_pegawai', 'tb_pegawai.id_pegawai=tb_pegawai_qc.id_pegawai')->join('tb_order', 'tb_order.id_order=tb_pegawai_qc.id_order')->where('tb_pegawai_qc.id_order', $id_order);
 		$data['pegawai_qc']		= $this->db->get()->result_array();
+		$data['jumlah_order'] = $data['order']['jumlah_ukuran_s'] + $data['order']['jumlah_ukuran_m'] + $data['order']['jumlah_ukuran_l'] + $data['order']['jumlah_ukuran_xl'] + $data['order']['jumlah_ukuran_xxl'];
+		$upah_cutting = $this->db->get_where('tb_upah_cutting', ['id_upah_cutting' => 1])->row_array();
+		$upah_jahit = $this->db->get_where('tb_upah_jahit', ['id_upah_jahit' => 1])->row_array();
+		$upah_qc = $this->db->get_where('tb_upah_qc', ['id_upah_qc' => 1])->row_array();
+		$data['upah_cutting'] = $upah_cutting['upah_cutting'];
+		$data['upah_jahit'] = $upah_jahit['upah_jahit'];
+		$data['upah_qc'] = $upah_qc['upah_qc'];
 		$this->load->view('order/detail', $data);
 	}
 
 	public function cetak($id_order)
 	{
-    $data['title']		= 'Data Order';
+		$this->load->library('pdf');
+		$data['title']		= 'Data Order';
 		$data['order']		= $this->M_order->get_by_id($id_order);
 		$data['produk']		= $this->M_produk->get_by_id($data['order']['id_produk']);
-		$this->load->view('order/cetak', $data);
+		$order		= $this->M_order->get_by_id($id_order);
+		$produk		= $this->M_produk->get_by_id($data['order']['id_produk']);
+
+		$data['jml_kain_s'] = $order['jumlah_ukuran_s'] * $produk['pnj_kain_s'];
+		$data['jml_kain_m'] = $order['jumlah_ukuran_m'] * $produk['pnj_kain_m'];
+		$data['jml_kain_l'] = $order['jumlah_ukuran_l'] * $produk['pnj_kain_l'];
+		$data['jml_kain_xl'] = $order['jumlah_ukuran_xl'] * $produk['pnj_kain_xl'];
+		$data['jml_kain_xxl'] = $order['jumlah_ukuran_xxl'] * $produk['pnj_kain_xxl'];
+		$data['total_harga_kain'] = ($data['jml_kain_s'] * $produk['harga_kain']) + 
+		($data['jml_kain_m'] * $produk['harga_kain']) + 
+		($data['jml_kain_l'] * $produk['harga_kain']) + 
+		($data['jml_kain_xl'] * $produk['harga_kain']) + 
+		($data['jml_kain_xxl'] * $produk['harga_kain']);
+
+		$data['jml_kancing_s'] = $order['jumlah_ukuran_s'] * $produk['jml_kancing_s'];
+		$data['jml_kancing_m'] = $order['jumlah_ukuran_m'] * $produk['jml_kancing_m'];
+		$data['jml_kancing_l'] = $order['jumlah_ukuran_l'] * $produk['jml_kancing_l'];
+		$data['jml_kancing_xl'] = $order['jumlah_ukuran_xl'] * $produk['jml_kancing_xl'];
+		$data['jml_kancing_xxl'] = $order['jumlah_ukuran_xxl'] * $produk['jml_kancing_xxl'];
+		$data['total_harga_kancing'] = ($data['jml_kancing_s'] * $produk['harga_kancing']) + 
+		($data['jml_kancing_m'] * $produk['harga_kancing']) + 
+		($data['jml_kancing_l'] * $produk['harga_kancing']) + 
+		($data['jml_kancing_xl'] * $produk['harga_kancing']) + 
+		($data['jml_kancing_xxl'] * $produk['harga_kancing']);
+
+		$data['jml_resleting_s'] = $order['jumlah_ukuran_s'] * $produk['pnj_resleting_s'];
+		$data['jml_resleting_m'] = $order['jumlah_ukuran_m'] * $produk['pnj_resleting_m'];
+		$data['jml_resleting_l'] = $order['jumlah_ukuran_l'] * $produk['pnj_resleting_l'];
+		$data['jml_resleting_xl'] = $order['jumlah_ukuran_xl'] * $produk['pnj_resleting_xl'];
+		$data['jml_resleting_xxl'] = $order['jumlah_ukuran_xxl'] * $produk['pnj_resleting_xxl'];
+		$data['total_harga_resleting'] = ($data['jml_resleting_s'] * $produk['harga_resleting']) + 
+		($data['jml_resleting_m'] * $produk['harga_resleting']) + 
+		($data['jml_resleting_l'] * $produk['harga_resleting']) + 
+		($data['jml_resleting_xl'] * $produk['harga_resleting']) + 
+		($data['jml_resleting_xxl'] * $produk['harga_resleting']);
+
+		$data['jml_prepet_s'] = $order['jumlah_ukuran_s'] * $produk['jml_prepet_s'];
+		$data['jml_prepet_m'] = $order['jumlah_ukuran_m'] * $produk['jml_prepet_m'];
+		$data['jml_prepet_l'] = $order['jumlah_ukuran_l'] * $produk['jml_prepet_l'];
+		$data['jml_prepet_xl'] = $order['jumlah_ukuran_xl'] * $produk['jml_prepet_xl'];
+		$data['jml_prepet_xxl'] = $order['jumlah_ukuran_xxl'] * $produk['jml_prepet_xxl'];
+		$data['total_harga_prepet'] = ($data['jml_prepet_s'] * $produk['harga_prepet']) + 
+		($data['jml_prepet_m'] * $produk['harga_prepet']) + 
+		($data['jml_prepet_l'] * $produk['harga_prepet']) + 
+		($data['jml_prepet_xl'] * $produk['harga_prepet']) + 
+		($data['jml_prepet_xxl'] * $produk['harga_prepet']);
+
+		$data['jml_rib_s'] = $order['jumlah_ukuran_s'] * $produk['pnj_rib_s'];
+		$data['jml_rib_m'] = $order['jumlah_ukuran_m'] * $produk['pnj_rib_m'];
+		$data['jml_rib_l'] = $order['jumlah_ukuran_l'] * $produk['pnj_rib_l'];
+		$data['jml_rib_xl'] = $order['jumlah_ukuran_xl'] * $produk['pnj_rib_xl'];
+		$data['jml_rib_xxl'] = $order['jumlah_ukuran_xxl'] * $produk['pnj_rib_xxl'];
+		$data['total_harga_rib'] = ($data['jml_rib_s'] * $produk['harga_rib']) + 
+		($data['jml_rib_m'] * $produk['harga_rib']) + 
+		($data['jml_rib_l'] * $produk['harga_rib']) + 
+		($data['jml_rib_xl'] * $produk['harga_rib']) + 
+		($data['jml_rib_xxl'] * $produk['harga_rib']);
+
+		$data['total_biaya'] = $data['total_harga_kain'] + $data['total_harga_kancing'] + $data['total_harga_resleting'] + $data['total_harga_prepet'] + $data['total_harga_rib'];
+		
+		$html_content = $this->load->view('order/cetak', $data, true);
+		$filename = 'BOM List .pdf';
+
+		$this->pdf->loadHtml($html_content);
+
+		$this->pdf->set_paper('a4','potrait');
+		
+		$this->pdf->render();
+		$this->pdf->stream($filename, ['Attachment' => 1]);
+    
+		//$this->load->view('order/cetak', $data);
 	}
 
 	private function upload_file($file)
@@ -186,6 +264,18 @@ class Order extends CI_Controller {
 		force_download('/assets/upload/file_keuangan/5533-15688-1-PB.pdf', NULL);
 	}
 
+	private function update_progres($id_order, $progress)
+	{
+		$data_user	= [
+			'id_order'		=> $id_order,
+			'progres'			=> $progress
+		];
+		
+		$this->M_order->update($data_user);
+
+		return true;
+	}
+
 	public function update_keuangan($id_order, $id_keuangan)
 	{
 		$data		= $this->input->post(null, true);
@@ -204,6 +294,8 @@ class Order extends CI_Controller {
 
 		$this->db->where('id_keuangan', $id_keuangan);
 		$this->db->update('tb_keuangan', $data_);
+
+		$this->update_progres($id_order, 'Keuangan - '.status_text($data['status_keuangan']));
 
 		$this->session->set_flashdata('msg', 'update-status');
 		redirect('detail-order/'.$id_order);
@@ -228,6 +320,8 @@ class Order extends CI_Controller {
 		$this->db->where('id_purchase', $id_purchase);
 		$this->db->update('tb_purchase', $data_);
 
+		$this->update_progres($id_order, 'Purchase - '.status_text($data['status_purchase']));
+
 		$this->session->set_flashdata('msg', 'update-status');
 		redirect('detail-order/'.$id_order);
 	}
@@ -250,6 +344,8 @@ class Order extends CI_Controller {
 
 		$this->db->where('id_cutting', $id_cutting);
 		$this->db->update('tb_cutting', $data_);
+
+		$this->update_progres($id_order, 'Cutting - '.status_text($data['status_cutting']));
 
 		$this->session->set_flashdata('msg', 'update-status');
 		redirect('detail-order/'.$id_order);
@@ -274,6 +370,8 @@ class Order extends CI_Controller {
 		$this->db->where('id_bordir', $id_bordir);
 		$this->db->update('tb_bordir', $data_);
 
+		$this->update_progres($id_order, 'Bordir - '.status_text($data['status_bordir']));
+
 		$this->session->set_flashdata('msg', 'update-status');
 		redirect('detail-order/'.$id_order);
 	}
@@ -296,6 +394,8 @@ class Order extends CI_Controller {
 
 		$this->db->where('id_jahit', $id_jahit);
 		$this->db->update('tb_jahit', $data_);
+
+		$this->update_progres($id_order, 'Jahit - '.status_text($data['status_jahit']));
 
 		$this->session->set_flashdata('msg', 'update-status');
 		redirect('detail-order/'.$id_order);
@@ -320,6 +420,8 @@ class Order extends CI_Controller {
 		$this->db->where('id_qc', $id_qc);
 		$this->db->update('tb_qc', $data_);
 
+		$this->update_progres($id_order, 'QC & Package - '.status_text($data['status_qc']));
+
 		$this->session->set_flashdata('msg', 'update-status');
 		redirect('detail-order/'.$id_order);
 	}
@@ -342,6 +444,18 @@ class Order extends CI_Controller {
 
 		$this->db->where('id_pengiriman', $id_pengiriman);
 		$this->db->update('tb_pengiriman', $data_);
+
+		$this->update_progres($id_order, 'Pengiriman - '.status_text($data['status_pengiriman']));
+
+		if ($data['status_pengiriman'] == 4) {
+			$data_user	= [
+				'id_order'		=> $id_order,
+				'status_order'			=> $data['status_pengiriman']
+			];
+			
+			$this->M_order->update($data_user);
+		}
+		
 
 		$this->session->set_flashdata('msg', 'update-status');
 		redirect('detail-order/'.$id_order);

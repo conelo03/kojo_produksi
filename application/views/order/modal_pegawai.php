@@ -28,11 +28,11 @@
         </div>
         <div class="form-group">
           <label for="1">Jumlah</label>
-          <input type="number" class="form-control" id="1" name="jumlah" value="" required="">
+          <input type="number" class="form-control" id="1" name="jumlah" value="<?= $jumlah_order ?>" required="">
         </div>
         <div class="form-group">
           <label for="1">Harga</label>
-          <input type="number" class="form-control" id="1" name="harga" value="" required="">
+          <input type="number" class="form-control" id="1" name="harga" value="<?= $upah_cutting ?>" required="">
         </div>
         <div class="form-group">
           <label for="1">Kasbon</label>
@@ -147,11 +147,11 @@
         </div>
         <div class="form-group">
           <label for="1">Jumlah</label>
-          <input type="number" class="form-control" id="1" name="jumlah" value="" required="">
+          <input type="number" class="form-control" id="1" name="jumlah" value="<?= $jumlah_order ?>" required="">
         </div>
         <div class="form-group">
           <label for="1">Harga</label>
-          <input type="number" class="form-control" id="1" name="harga" value="" required="">
+          <input type="number" class="form-control" id="1" name="harga" value="<?= $upah_jahit ?>" required="">
         </div>
         <div class="form-group">
           <label for="1">Kasbon</label>
@@ -258,11 +258,11 @@
         </div>
         <div class="form-group">
           <label for="1">Jumlah</label>
-          <input type="number" class="form-control" id="1" name="jumlah" value="" required="">
+          <input type="number" class="form-control" id="1" name="jumlah" value="<?= $jumlah_order ?>" required="">
         </div>
         <div class="form-group">
           <label for="1">Harga</label>
-          <input type="number" class="form-control" id="1" name="harga" value="" required="">
+          <input type="number" class="form-control" id="1" name="harga" value="<?= $upah_qc ?>" required="">
         </div>
         <div class="form-group">
           <label for="1">Kasbon</label>
