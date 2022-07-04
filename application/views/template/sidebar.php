@@ -52,6 +52,7 @@ $get_user = $this->db->get_where('tb_pegawai', ['id_pegawai' => $id_pegawai])->r
 
             <li class="menu-header">Data Transaksi</li>       
             <li class="<?= $title == 'Data Order' ? 'active' : ''; ?>"><a class="nav-link" href="<?= base_url('order');?>"><i class="fas fa-cart-plus"></i> <span>Data Order</span></a></li> 
+            <li class="<?= $title == 'Riwayat Order' ? 'active' : ''; ?>"><a class="nav-link" href="<?= base_url('riwayat-order');?>"><i class="fas fa-list"></i> <span>Riwayat Order</span></a></li> 
 
           </ul>
 

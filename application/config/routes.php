@@ -81,4 +81,6 @@ $route['tambah-order'] 	        = 'Order/tambah';
 $route['edit-order/(:any)'] 	    = 'Order/edit/$1';
 $route['hapus-order/(:any)']    	= 'Order/hapus/$1';
 $route['detail-order/(:any)']		= 'Order/detail/$1';
-$route['cetak-bom-list/(:any)']		= 'Order/cetak/$1';
+$route['cetak-order/(:any)']		= 'Order/cetak/$1';
+$route['riwayat-order']		= 'Order/riwayat';
+$route['cetak-bom-list/(:any)']		= 'Order/cetak_bom_list/$1';

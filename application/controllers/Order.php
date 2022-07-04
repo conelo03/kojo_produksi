@@ -22,6 +22,13 @@ class Order extends CI_Controller {
 		$this->load->view('order/data', $data);
 	}
 
+	public function riwayat()
+	{
+    $data['title']		= 'Riwayat Order';
+		$data['order']		= $this->M_order->get_data_riwayat()->result_array();
+		$this->load->view('order/data_riwayat', $data);
+	}
+
 	public function tambah()
 	{
 		$this->validation();
@@ -166,6 +173,30 @@ class Order extends CI_Controller {
 	public function cetak($id_order)
 	{
 		$this->load->library('pdf');
+    $data['title']		= 'Data Order';
+		$data['order']		= $this->M_order->get_by_id($id_order);
+		$this->db->select('*, tb_pegawai_cutting.id_pegawai as id_pegawai')->from('tb_pegawai_cutting')->join('tb_pegawai', 'tb_pegawai.id_pegawai=tb_pegawai_cutting.id_pegawai')->join('tb_order', 'tb_order.id_order=tb_pegawai_cutting.id_order')->where('tb_pegawai_cutting.id_order', $id_order);
+		$data['pegawai_cutting']		= $this->db->get()->result_array();
+		$this->db->select('*, tb_pegawai_jahit.id_pegawai as id_pegawai')->from('tb_pegawai_jahit')->join('tb_pegawai', 'tb_pegawai.id_pegawai=tb_pegawai_jahit.id_pegawai')->join('tb_order', 'tb_order.id_order=tb_pegawai_jahit.id_order')->where('tb_pegawai_jahit.id_order', $id_order);
+		$data['pegawai_jahit']		= $this->db->get()->result_array();
+		$this->db->select('*, tb_pegawai_qc.id_pegawai as id_pegawai')->from('tb_pegawai_qc')->join('tb_pegawai', 'tb_pegawai.id_pegawai=tb_pegawai_qc.id_pegawai')->join('tb_order', 'tb_order.id_order=tb_pegawai_qc.id_order')->where('tb_pegawai_qc.id_order', $id_order);
+		$data['pegawai_qc']		= $this->db->get()->result_array();
+		
+		$html_content = $this->load->view('order/cetak', $data, true);
+		$filename = 'Laporan Order - '.$data['order']['nama_pelanggan'].'('.$data['order']['no_telepon'].')'.' .pdf';
+
+		$this->pdf->loadHtml($html_content);
+
+		$this->pdf->set_paper('a4','potrait');
+		
+		$this->pdf->render();
+		$this->pdf->stream($filename, ['Attachment' => 1]);
+		//$this->load->view('order/cetak', $data);
+	}
+
+	public function cetak_bom_list($id_order)
+	{
+		$this->load->library('pdf');
 		$data['title']		= 'Data Order';
 		$data['order']		= $this->M_order->get_by_id($id_order);
 		$data['produk']		= $this->M_produk->get_by_id($data['order']['id_produk']);
@@ -229,7 +260,7 @@ class Order extends CI_Controller {
 
 		$data['total_biaya'] = $data['total_harga_kain'] + $data['total_harga_kancing'] + $data['total_harga_resleting'] + $data['total_harga_prepet'] + $data['total_harga_rib'];
 		
-		$html_content = $this->load->view('order/cetak', $data, true);
+		$html_content = $this->load->view('order/cetak_bom_list', $data, true);
 		$filename = 'BOM List .pdf';
 
 		$this->pdf->loadHtml($html_content);
